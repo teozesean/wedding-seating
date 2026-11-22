@@ -89,11 +89,11 @@ const INDIV_VEG={"RR's mom":1,"Yi Zen":1};
 function isIndivVeg(n){return !!INDIV_VEG[String(n||'').trim()]}
 /* Floor-plan slots, in the original Malaysia page layout.
    vip: centre, just below the stage. Left slots: 2 columns x 7 rows
-   (last row has one slot only, in the outer/left column). Right: 2 x 8.
+   (last row has one slot only, in the aisle-side/right column). Right: 2 x 8.
    x: 0=left outer, 1=left aisle side, 2=vip centre, 3=right aisle side, 4=right outer.
    y: 0=vip row, 1-8 = front to back. */
 const SLOTS=[{id:'vip',x:2,y:0}];
-for(let i=0;i<13;i++) SLOTS.push({id:'L'+i,x:i%2,y:Math.floor(i/2)+1});
+for(let i=0;i<13;i++) SLOTS.push({id:'L'+i,x:i===12?1:i%2,y:Math.floor(i/2)+1});
 for(let i=0;i<16;i++) SLOTS.push({id:'R'+i,x:3+(i%2),y:Math.floor(i/2)+1});
 function defaultAssign(){const a={};a.vip='1';for(let i=0;i<13;i++)a['L'+i]=String(i+2);for(let i=0;i<16;i++)a['R'+i]=String(i+15);return a}
 function defaultState(){return {data:JSON.parse(JSON.stringify(ORIGINAL)),assign:defaultAssign(),veg:Object.assign({},VEG_DEFAULT)}}
@@ -132,9 +132,9 @@ function renderPlan(){
   const g=document.getElementById('planGrid'); let h='<div class="aisle" aria-hidden="true"><span>Aisle</span></div>';
   for(const s of SLOTS){ if(s.id==='vip') continue; const t=state.assign[s.id];
     h+='<button class="ptable'+(state.veg[t]?' veg':'')+(selected===t?' sel':'')+'" data-t="'+t+'" style="grid-column:'+(s.x+1)+';grid-row:'+s.y+'" aria-label="Table '+t+' — show guests">'+t+'</button>'; }
-  /* keep the empty cell beside Table 14 (last left row, aisle-side) blank —
-     no circle, and Table 14 keeps the standard 52px size in the outer column */
-  h+='<div class="slot-empty" style="grid-column:2;grid-row:7" aria-hidden="true"></div>';
+  /* keep the empty cell beside Table 14 (last left row, outer/left) blank —
+     no circle, and Table 14 keeps the standard 52px size in the aisle-side column */
+  h+='<div class="slot-empty" style="grid-column:1;grid-row:7" aria-hidden="true"></div>';
   g.innerHTML=h;
 }
 function renderAll(){
