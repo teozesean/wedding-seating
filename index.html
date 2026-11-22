@@ -129,7 +129,7 @@ function tableControls(t){
 function addRow(t){return '<div class="add-row"><input type="text" class="add-input" data-t="'+t+'" placeholder="New guest name…" aria-label="New guest name for Table '+t+'"><button class="act add-btn" data-t="'+t+'">Add guest</button></div>'}
 function cardHtml(t){return '<div class="card" id="card-'+t+'"><h3>Table '+t+(state.veg[t]?' <span class="vegtag">素席 Vegetarian</span>':'')+(t==='1'?' · VIP':'')+' <span class="vegtag" style="color:#999;font-weight:400">· '+count(t)+' guests</span></h3>'+guestList(t)+addRow(t)+tableControls(t)+'</div>'}
 function hasIndivVegGuest(t){return !state.veg[t] && (state.data[t]||[]).some(function(n){return isIndivVeg(n)})}
-function leafBadge(t){return hasIndivVegGuest(t)?'<span class="leaf-badge" aria-hidden="true">🌿</span>':''}
+function leafBadge(t){return (hasIndivVegGuest(t)||state.veg[t])?'<span class="leaf-badge" aria-hidden="true">🌿</span>':''}
 function renderPlan(){
   document.getElementById('planVip').innerHTML='<button class="ptable vip'+(selected===state.assign.vip?' sel':'')+'" data-t="'+state.assign.vip+'">Table '+state.assign.vip+' · VIP'+leafBadge(state.assign.vip)+'</button>';
   const g=document.getElementById('planGrid'); let h='<div class="aisle" aria-hidden="true"><span>Aisle</span></div>';
