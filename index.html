@@ -9,20 +9,29 @@ input[type=search]{width:100%;padding:12px;font-size:16px;border:1px solid #bbb;
 .note{font-size:13px;color:#666}.vegtag{color:#2e7d32;font-size:13px}.veg-indiv{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;border-radius:999px;padding:1px 7px;font-size:11.5px;font-weight:600;white-space:nowrap}
 /* ---- Floor plan: mimics the original Malaysia page graphic ---- */
 .plan{background:#fff;border:1px solid #ddd;border-radius:18px;padding:18px 14px;margin:14px 0}
-.plan-stage{text-align:center;background:#333;color:#fff;border-radius:10px;padding:10px;font-size:13px;letter-spacing:.28em;font-weight:700}
+.plan-stage{text-align:center;background:#333;color:#fff;border-radius:10px;padding:10px;font-size:13px;letter-spacing:.28em;font-weight:700;line-height:1.5}
+.plan-stage .stage-dims{display:block;letter-spacing:.04em;font-size:11.5px;font-weight:600;opacity:.85;margin-top:2px;text-transform:none}
+.plan-upper{position:relative;display:flex;justify-content:center;margin:12px 0 4px;min-height:52px}
+.side-entrance{position:absolute;right:0;top:6px;border:1.5px dashed #9e1b21;color:#9e1b21;border-radius:6px;padding:3px 6px;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-align:center;line-height:1.25;max-width:84px;background:#fff;opacity:.85}
+.side-entrance small{display:block;font-weight:600;letter-spacing:0;text-transform:none;color:#666;font-size:9.5px;margin-top:1px}
+@media(max-width:560px){.side-entrance{position:static;margin-left:10px}.plan-upper{flex-wrap:wrap;gap:8px}}
 .plan-vip{display:flex;justify-content:center;margin:12px 0 4px}
 .ptable{position:relative;width:52px;height:52px;flex:0 0 52px;border-radius:50%;border:2px solid #5b2333;background:#fdf6ec;color:#5b2333;font-weight:700;font-size:16px;cursor:pointer;display:grid;place-items:center;padding:0;justify-self:center}
 .ptable:hover{background:#f3e3c8}.ptable.sel{background:#5b2333;color:#fff}.ptable.veg{border-color:#2e7d32;color:#2e7d32}.ptable.veg.sel{background:#2e7d32;color:#fff}
 .leaf-badge{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#fff;border:1.5px solid #2e7d32;display:grid;place-items:center;font-size:12px;line-height:1;pointer-events:none;z-index:2}
 .ptable.vip{width:auto;height:auto;flex:none;border-radius:999px;padding:10px 22px;background:#f7ead0;border-color:#b98a2f;color:#7a5a14;font-size:14px}
 .ptable.vip.sel{background:#b98a2f;color:#fff}
-.plan-grid{display:grid;grid-template-columns:60px 60px 36px 60px 60px;gap:10px 8px;align-items:center;justify-content:center;margin:12px auto 0;max-width:340px}
+.plan-grid{display:grid;grid-template-columns:60px 60px 36px 60px 60px;gap:14px 8px;align-items:center;justify-content:center;margin:10px auto 0;max-width:340px;padding:4px 2px 24px}
+.ptable.stagger{transform:translateY(18px)}
 .aisle{grid-column:3;grid-row:1/9;background:linear-gradient(#c0272d,#9e1b21);border-radius:6px;align-self:stretch;display:grid;place-items:center;min-height:100%}
 .aisle span{writing-mode:vertical-rl;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#fff;font-weight:700}
 .slot-empty{width:52px;height:52px;justify-self:center}
 .plan-door{display:flex;justify-content:center;margin:0 auto;max-width:340px}
 .plan-door span{margin-left:0;width:36px;text-align:center;font-size:10px;letter-spacing:.14em;color:#9e1b21;font-weight:700;border:2px dashed #c0272d;border-top:0;border-radius:0 0 8px 8px;padding:3px 0 5px;writing-mode:vertical-rl}
-.plan-foot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;max-width:560px;margin:14px auto 0}
+.plan-foot{display:flex;justify-content:space-between;align-items:stretch;gap:8px;flex-wrap:wrap;max-width:560px;margin:14px auto 0}
+.foot-entrance{border:1.5px dashed #9e1b21;color:#9e1b21;background:#fdf0f0;border-radius:10px;padding:4px 8px;font-size:10px;font-weight:700;text-align:center;line-height:1.3;opacity:.9;align-self:center}
+.foot-entrance small{display:block;color:#666;font-weight:600;font-size:9.5px;letter-spacing:0}
+.foot-spacer{flex:1;min-width:24px}
 .foot-box{border:1.5px solid #bbb;border-radius:10px;padding:9px 6px;text-align:center;font-size:12px;font-weight:700;letter-spacing:.08em;color:#555;background:#f6f1e7}
 .foot-box.bar{border-color:#7a4a12;color:#7a4a12;background:#fdf3df}
 .foot-box.entrance{border-color:#9e1b21;color:#9e1b21;background:#fdf0f0;border-style:dashed}
@@ -63,12 +72,12 @@ button.reset{background:#5b2333;color:#fff;border:0;padding:11px 16px;border-rad
 <input type="search" id="q" placeholder="Search a guest name…">
 <div id="results"></div>
 <p class="note">Tap a table on the floor plan to see its guests. In the table list below you can tap any name to edit it, add or remove guests, move a guest to another table, renumber or swap tables, and move a table's position on the plan. All edits save automatically on this device. Works fully offline. Use the Export button below to copy your edited seating and paste it back to Sage.</p>
-<div class="plan" aria-label="Venue floor plan with wedding table numbers">
-<div class="plan-stage">STAGE</div>
-<div class="plan-vip" id="planVip"></div>
+<div class="plan" aria-label="Venue floor plan with wedding table numbers — Sky Ballroom, 29 plus 1 tables">
+<div class="plan-stage">STAGE<span class="stage-dims">30 ft wide × 15 ft deep · Stage high 2.5 ft</span></div>
+<div class="plan-upper"><div class="plan-vip" id="planVip"></div><div class="side-entrance" aria-label="Side entrance near Table 16">↵ ENTRANCE<small>near Table 16</small></div></div>
 <div class="plan-grid" id="planGrid"></div>
-<div class="plan-foot"><div class="foot-box bar">🍸 BAR<small>Bottom-left</small></div><div class="foot-box entrance">ENTRANCE<small>Centre — end of the aisle</small></div><div class="foot-box booth">🎛 BOOTH · AV<small>Bottom-right</small></div></div>
-<p class="plan-note">Table 1 = VIP by the stage. Left side: Tables 2–14, front to back. Right side: Tables 15–30, front to back. Red carpet aisle runs down the centre to the entrance.</p>
+<div class="plan-foot"><div class="foot-box bar">🍸 BAR<small>Bottom-left</small></div><div class="foot-box booth">📸 PHOTO BOOTH<small>Next to the Bar</small></div><div class="foot-box">🎛 AV</div><div class="foot-entrance">ENTRANCE<small>Main · bottom centre</small></div><span class="foot-spacer" aria-hidden="true"></span></div>
+<p class="plan-note">Sky Ballroom (29+1 tables). Table 1 = VIP oval in the centre below the stage. Red carpet aisle down the centre. Tables are staggered in a slight zigzag — the two columns on each side are offset by about half a row, as in the venue plan. Tables 2–14 = left side, front to back. Tables 15–30 = right side, front to back. Side entrance at the top right, near Table 16; main entrance at the bottom centre, beside the AV box. Bar at the bottom left, with the Photo Booth right next to it, clear of the tables.</p>
 </div>
 <div id="detail"><em>Tap a table above to see its guests here.</em></div>
 <h2>All tables</h2><div class="grid" id="all"></div>
@@ -80,12 +89,12 @@ button.reset{background:#5b2333;color:#fff;border:0;padding:11px 16px;border-rad
 <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="act" id="copyExport">Copy seating</button><button class="act light" id="downloadExport">Download as .txt</button></div>
 <p class="note" id="exportStatus"></p>
 </div>
-<p class="note">Tables 21 &amp; 22 are vegetarian (素席). Table 9 seat 10 is blank on purpose — a backup seat; that empty seat stays and can't be removed. Reset restores the original Tables 1–30 seating, guest names and floor-plan positions.</p>
+<p class="note">Tables 16 &amp; 18 are vegetarian (素席). Table 9 seat 10 is blank on purpose — a backup seat; that empty seat stays and can't be removed. Reset restores the original Tables 1–30 seating, guest names and floor-plan positions.</p>
 </div>
 <script>
-const ORIGINAL={"1": ["Rui Rou", "Sean", "Sean's mom", "Sean's dad", "RR's mom", "RR's dad", "Ah Ma", "Daniel", "Ze Lyn", "Lao Yi", "Lao Yi Teow"], "2": ["Ah Eng", "Ah Eng +1", "Ah Eng +2", "Mary", "Mary's Husband", "Wen Ping", "Wen Ping +1", "Wen Ping +2", "Harvey", "Harvey +1"], "3": ["Ah Cheok", "Ah Tian", "Ah Tian +1", "Ah Tian +2", "Ah Tian +3", "Ah Hock", "Ah Hock +1", "Ah Hock +2", "Ah Hock +3", "Ah Hock +4"], "4": ["Lee Kee Seng", "Lee Kee Seng +1", "Lee Kee Seng +2", "Ai Leen", "Bernard", "Bernard +1", "Bernard +2", "Bernard +3", "Bernard +4", "Cheryl"], "5": ["Ah Chai", "Ah Chai +1", "Ah Chai +2", "Ah Chai +3 (Dasmond Teo)", "Tomas", "Tomas +1", "Tomas +2", "Terence", "Terence +1", "Terence +2"], "6": ["BooCher Heng", "Mui Nyuk Lee", "Vincent Toh", "Vincent Toh +1", "Robert Hew", "Robert Hew +1", "Khoo", "Khoo +1", "Rick", "Rick +1"], "7": ["Yoon Sik (Sebas's Dad)", "Eun Joo (Sebas's Mom)", "Mervin", "Mervin +1", "Alvin", "Alvin +1", "Goh Joon Wah", "Goh Joon Wah +1", "Goh Lim Ann", "Goh Lim Ann +1"], "8": ["Jun Hoe", "Cass", "Shane Lee", "Amelia", "Jared", "Ethan", "Tina (Yun Tang)", "Jason", "Haow Jinq", "Sze Haw"], "9": ["Rui Qi", "Robin", "Rui Han", "Christina", "Wen", "Janet", "Jon", "Debby", "Sook Wei", ""], "10": ["Yi Zen", "Shane Chia", "Gabe", "Sebastian", "Siew Wai", "Lee Hin", "Yong Jun", "Yoong Jian", "Chen Yong", "Brian Chen"], "11": ["Ian", "Choon Pei Yap (Isa)", "Kar Yeen", "Aron", "Timmy", "Charmaine", "Yee Sum", "Chun Yen", "Sherwyn", "Sayako"], "12": ["張佳薇", "赖富章", "丘汉杰", "陈银英", "黄井", "萧伶娣", "苏阿堡", "罗月娇", "陈满妹", ""], "13": ["秀珍", "CLINIC 1", "CLINIC 2", "CLINIC 3", "CLINIC 4", "CLINIC 5", "APPLE", "ORANGE", "MICHAEL", "爱心"], "14": ["李金华", "梁宝凌", "郑美煌", "苏秀嬅", "郑意锜", "郑义勋", "張顺量", "刘靖财", "陈金嫺", "李伟乔"], "16": ["娘家 1"], "17": ["老师家人 1", "老师"], "18": ["娘家 2"], "19": ["老师家人 2"], "20": ["娘家 3"], "21": ["叶上蕾", "李淑勉", "关观婉", "張卉芳", "SIA", "郑金华", "郑金华", "家工人", "家工人", "清姐"], "22": ["JASMINE", "陈忠顺", "KAREN", "林月爱", "ANGIE NG", "三姐儿子富华", "三姐媳妇绮萍", "玉珍", "俐瑩", ""], "23": ["秀秀", "LAI", "VALERIE", "SERENA", "萧翠萍", "張秀英", "曾素钎", "陈思俊", "叶美玲", "颜明月"], "24": ["陈淑贞", "黄绣莉", "阙伟福", "林小玲", "黄稏烈", "谢佳融", "谢佩诗", "谢和莃", "MOLLY", "杨玉梅"], "25": ["文丽君", "罗琼芳", "張浟涟", "郑碧琪", "蔡静莉", "詹丽珍", "吳太", "李丽玉", "郭夤袀", "吳素玲"], "26": ["刘美娜", "黄育桓", "陈素枝", "張富翔", "李雅媚", "陈忠庆", "曾翠霞", "黄锦友", "郑宝珠", "黄维杰"], "27": ["小姑"], "28": ["黄仲修", "CINDY", "ANDY", "ADELINE", "CC LEE", "CC LEE WIFE", "VINCENT", "VINCENT'S WIFE", "杨建裕", "吳清懿"], "29": ["HO KHAI SING", "CHONG CL", "WUU SL", "WONG KW", "Alfred Tan", "ANDY NG", "Lim Hock Chun", "MS GOH PG", "小姑", "小姑"], "30": ["LEE CHIANG BAK", "ALBERT LIM", "TAN MING HO", "NG KAM WAH", "SIAU HC", "LUM PC", "UNCLE CHONG", "DR PATRICK LOI", "ALAN WONG", ""], "15": ["四叔 + 小姑"]};
-const KEY='wedding-seating-offline-v3';
-const VEG_DEFAULT={'21':1,'22':1};
+const ORIGINAL={"1": ["Rui Rou", "Sean", "Sean's mom", "Sean's dad", "RR's mom", "RR's dad", "Ah Ma", "Daniel", "Ze Lyn", "Lao Yi", "Lao Yi Teow"], "2": ["Ah Eng", "Ah Eng +1", "Ah Eng +2", "Mary", "Mary's Husband", "Wen Ping", "Wen Ping +1", "Wen Ping +2", "Harvey", "Harvey +1"], "3": ["Ah Cheok", "Ah Tian", "Ah Tian +1", "Ah Tian +2", "Ah Tian +3", "Ah Hock", "Ah Hock +1", "Ah Hock +2", "Ah Hock +3", "Ah Hock +4"], "4": ["Lee Kee Seng", "Lee Kee Seng +1", "Lee Kee Seng +2", "Ai Leen", "Bernard", "Bernard +1", "Bernard +2", "Bernard +3", "Bernard +4", "Cheryl"], "5": ["Ah Chai", "Ah Chai +1", "Ah Chai +2", "Ah Chai +3 (Dasmond Teo)", "Tomas", "Tomas +1", "Tomas +2", "Terence", "Terence +1", "Terence +2"], "6": ["BooCher Heng", "Mui Nyuk Lee", "Vincent Toh", "Vincent Toh +1", "Robert Hew", "Robert Hew +1", "Khoo", "Khoo +1", "Rick", "Rick +1"], "7": ["Yoon Sik (Sebas's Dad)", "Eun Joo (Sebas's Mom)", "Mervin", "Mervin +1", "Alvin", "Alvin +1", "Goh Joon Wah", "Goh Joon Wah +1", "Goh Lim Ann", "Goh Lim Ann +1"], "8": ["Jun Hoe", "Cass", "Shane Lee", "Amelia", "Jared", "Ethan", "Tina (Yun Tang)", "Jason", "Haow Jinq", "Sze Haw"], "9": ["Rui Qi", "Robin", "Rui Han", "Christina", "Wen", "Janet", "Jon", "Debby", "Sook Wei", ""], "10": ["Yi Zen", "Shane Chia", "Gabe", "Sebastian", "Siew Wai", "Lee Hin", "Yong Jun", "Yoong Jian", "Chen Yong", "Brian Chen"], "11": ["Ian", "Choon Pei Yap (Isa)", "Kar Yeen", "Aron", "Timmy", "Charmaine", "Yee Sum", "Chun Yen", "Sherwyn", "Sayako"], "12": ["張佳薇", "赖富章", "丘汉杰", "陈银英", "黄井", "萧伶娣", "苏阿堡", "罗月娇", "陈满妹", ""], "13": ["秀珍", "CLINIC 1", "CLINIC 2", "CLINIC 3", "CLINIC 4", "CLINIC 5", "APPLE", "ORANGE", "MICHAEL", "爱心"], "14": ["李金华", "梁宝凌", "郑美煌", "苏秀嬅", "郑意锜", "郑义勋", "張顺量", "刘靖财", "陈金嫺", "李伟乔"], "16": ["叶上蕾", "李淑勉", "关观婉", "張卉芳", "SIA", "郑金华", "郑金华", "家工人", "家工人", "清姐"], "17": ["娘家 1"], "18": ["JASMINE", "陈忠顺", "KAREN", "林月爱", "ANGIE NG", "三姐儿子富华", "三姐媳妇绮萍", "玉珍", "俐瑩", ""], "19": ["娘家 2"], "20": ["娘家 3"], "21": ["老师家人 1", "老师"], "22": ["老师家人 2"], "23": ["秀秀", "LAI", "VALERIE", "SERENA", "萧翠萍", "張秀英", "曾素钎", "陈思俊", "叶美玲", "颜明月"], "24": ["陈淑贞", "黄绣莉", "阙伟福", "林小玲", "黄稏烈", "谢佳融", "谢佩诗", "谢和莃", "MOLLY", "杨玉梅"], "25": ["文丽君", "罗琼芳", "張浟涟", "郑碧琪", "蔡静莉", "詹丽珍", "吳太", "李丽玉", "郭夤袀", "吳素玲"], "26": ["刘美娜", "黄育桓", "陈素枝", "張富翔", "李雅媚", "陈忠庆", "曾翠霞", "黄锦友", "郑宝珠", "黄维杰"], "27": ["小姑"], "28": ["黄仲修", "CINDY", "ANDY", "ADELINE", "CC LEE", "CC LEE WIFE", "VINCENT", "VINCENT'S WIFE", "杨建裕", "吳清懿"], "29": ["HO KHAI SING", "CHONG CL", "WUU SL", "WONG KW", "Alfred Tan", "ANDY NG", "Lim Hock Chun", "MS GOH PG", "小姑", "小姑"], "30": ["LEE CHIANG BAK", "ALBERT LIM", "TAN MING HO", "NG KAM WAH", "SIAU HC", "LUM PC", "UNCLE CHONG", "DR PATRICK LOI", "ALAN WONG", ""], "15": ["四叔 + 小姑"]};
+const KEY='wedding-seating-offline-v4';
+const VEG_DEFAULT={'16':1,'18':1};
 const INDIV_VEG={"RR's mom":1,"Yi Zen":1,"老师":1};
 function isIndivVeg(n){return !!INDIV_VEG[String(n||'').trim()]}
 /* Floor-plan slots, in the original Malaysia page layout.
@@ -132,9 +141,9 @@ function hasIndivVegGuest(t){return !state.veg[t] && (state.data[t]||[]).some(fu
 function leafBadge(t){return (hasIndivVegGuest(t)||state.veg[t])?'<span class="leaf-badge" aria-hidden="true">🌿</span>':''}
 function renderPlan(){
   document.getElementById('planVip').innerHTML='<button class="ptable vip'+(selected===state.assign.vip?' sel':'')+'" data-t="'+state.assign.vip+'">Table '+state.assign.vip+' · VIP'+leafBadge(state.assign.vip)+'</button>';
-  const g=document.getElementById('planGrid'); let h='<div class="aisle" aria-hidden="true"><span>Aisle</span></div>';
+  const g=document.getElementById('planGrid'); let h='<div class="aisle" aria-hidden="true"><span>Red Carpet</span></div>';
   for(const s of SLOTS){ if(s.id==='vip') continue; const t=state.assign[s.id];
-    h+='<button class="ptable'+(state.veg[t]?' veg':'')+(selected===t?' sel':'')+'" data-t="'+t+'" style="grid-column:'+(s.x+1)+';grid-row:'+s.y+'" aria-label="Table '+t+(hasIndivVegGuest(t)?' — has vegetarian guest':'')+' — show guests">'+t+leafBadge(t)+'</button>'; }
+    h+='<button class="ptable'+(state.veg[t]?' veg':'')+(selected===t?' sel':'')+((s.x===0||s.x===4)?' stagger':'')+'" data-t="'+t+'" style="grid-column:'+(s.x+1)+';grid-row:'+s.y+'" aria-label="Table '+t+(hasIndivVegGuest(t)?' — has vegetarian guest':'')+' — show guests">'+t+leafBadge(t)+'</button>'; }
   /* keep the empty cell beside Table 14 (last left row, outer/left) blank —
      no circle, and Table 14 keeps the standard 52px size in the aisle-side column */
   h+='<div class="slot-empty" style="grid-column:1;grid-row:7" aria-hidden="true"></div>';
