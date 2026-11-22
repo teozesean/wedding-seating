@@ -8,39 +8,43 @@ input[type=search]{width:100%;padding:12px;font-size:16px;border:1px solid #bbb;
 #results{margin:10px 0}.res{background:#fff;border:1px solid #ddd;border-radius:8px;padding:8px 10px;margin:6px 0;cursor:pointer}
 .note{font-size:13px;color:#666}.vegtag{color:#2e7d32;font-size:13px}.veg-indiv{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;border-radius:999px;padding:1px 7px;font-size:11.5px;font-weight:600;white-space:nowrap}
 /* ---- Floor plan: mimics the original Malaysia page graphic ---- */
-.plan{background:#fff;border:1px solid #ddd;border-radius:18px;padding:18px 14px;margin:14px 0}
+.plan{position:relative;background:#fffdf7;border:7px solid #7a6650;border-radius:14px;box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 4px #d9cdb9,0 1px 4px rgba(60,45,25,.18);padding:20px 12px 8px;margin:16px auto 30px;max-width:520px}
+body{overflow-x:hidden}
 .plan-stage{text-align:center;background:#333;color:#fff;border-radius:10px;padding:10px;font-size:13px;letter-spacing:.28em;font-weight:700;line-height:1.5}
 .plan-stage .stage-dims{display:block;letter-spacing:.04em;font-size:11.5px;font-weight:600;opacity:.85;margin-top:2px;text-transform:none}
-.plan-upper{position:relative;display:flex;justify-content:center;margin:12px 0 4px;min-height:52px}
-.side-entrance{position:absolute;right:0;top:6px;border:1.5px dashed #9e1b21;color:#9e1b21;border-radius:6px;padding:3px 6px;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-align:center;line-height:1.25;max-width:84px;background:#fff;opacity:.85}
+.plan-upper{position:static;display:flex;justify-content:center;margin:12px 0 4px;min-height:52px}
+.side-entrance{position:absolute;right:-28px;top:256px;transform:rotate(90deg);border:1.5px dashed #9e1b21;color:#9e1b21;border-radius:6px;padding:4px 8px;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-align:center;line-height:1.25;width:118px;background:#faf7f2;z-index:6}
 .side-entrance small{display:block;font-weight:600;letter-spacing:0;text-transform:none;color:#666;font-size:9.5px;margin-top:1px}
-@media(max-width:560px){.side-entrance{position:static;margin-left:10px}.plan-upper{flex-wrap:wrap;gap:8px}}
+@media(max-width:560px){.side-entrance{right:-30px;top:257px;width:104px}.plan-upper{flex-wrap:wrap;gap:8px}}
 .plan-vip{display:flex;justify-content:center;margin:12px 0 4px}
 .ptable{position:relative;width:52px;height:52px;flex:0 0 52px;border-radius:50%;border:2px solid #5b2333;background:#fdf6ec;color:#5b2333;font-weight:700;font-size:16px;cursor:pointer;display:grid;place-items:center;padding:0;justify-self:center}
 .ptable:hover{background:#f3e3c8}.ptable.sel{background:#5b2333;color:#fff}.ptable.veg{border-color:#2e7d32;color:#2e7d32}.ptable.veg.sel{background:#2e7d32;color:#fff}
 .leaf-badge{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#fff;border:1.5px solid #2e7d32;display:grid;place-items:center;font-size:12px;line-height:1;pointer-events:none;z-index:2}
 .ptable.vip{width:auto;height:auto;flex:none;border-radius:999px;padding:10px 22px;background:#f7ead0;border-color:#b98a2f;color:#7a5a14;font-size:14px}
 .ptable.vip.sel{background:#b98a2f;color:#fff}
-.plan-grid{display:grid;grid-template-columns:60px 60px 36px 60px 60px;gap:14px 8px;align-items:center;justify-content:center;margin:10px auto 0;max-width:340px;padding:4px 2px 24px}
-.ptable.stagger{transform:translateY(18px)}
+.plan-grid{display:grid;grid-template-columns:60px 60px 36px 60px 60px;gap:14px 8px;align-items:center;justify-content:center;margin:10px auto 0;max-width:340px;padding:4px 2px 2px}
+.ptable.stagger{transform:translateY(-18px)}
 .aisle{grid-column:3;grid-row:1/9;background:linear-gradient(#c0272d,#9e1b21);border-radius:6px;align-self:stretch;display:grid;place-items:center;min-height:100%}
 .aisle span{writing-mode:vertical-rl;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#fff;font-weight:700}
 .slot-empty{width:52px;height:52px;justify-self:center}
 .plan-door{display:flex;justify-content:center;margin:0 auto;max-width:340px}
 .plan-door span{margin-left:0;width:36px;text-align:center;font-size:10px;letter-spacing:.14em;color:#9e1b21;font-weight:700;border:2px dashed #c0272d;border-top:0;border-radius:0 0 8px 8px;padding:3px 0 5px;writing-mode:vertical-rl}
-.plan-foot{display:flex;justify-content:space-between;align-items:stretch;gap:8px;flex-wrap:wrap;max-width:560px;margin:14px auto 0}
-.foot-entrance{border:1.5px dashed #9e1b21;color:#9e1b21;background:#fdf0f0;border-radius:10px;padding:4px 8px;font-size:10px;font-weight:700;text-align:center;line-height:1.3;opacity:.9;align-self:center}
+.plan-foot{position:relative;z-index:4;display:grid;grid-template-columns:60px 60px 36px 60px 60px;column-gap:8px;row-gap:8px;align-items:end;justify-content:center;max-width:340px;margin:-120px auto 0}
+.foot-av-group{grid-column:3/6;display:flex;gap:6px;align-items:stretch;justify-self:stretch;align-self:end}
+.foot-av-group .foot-box{flex:0 0 auto;min-width:76px;padding:12px 10px;display:grid;place-items:center}
+.foot-av-group .foot-entrance{flex:1 1 auto}
+.foot-box.bar{width:124px}
+.foot-entrance{position:static;border:1.5px dashed #9e1b21;color:#9e1b21;background:#fdf0f0;border-radius:10px;padding:9px 8px;font-size:10px;font-weight:700;text-align:center;line-height:1.3;display:grid;place-items:center;align-content:center}
 .foot-entrance small{display:block;color:#666;font-weight:600;font-size:9.5px;letter-spacing:0}
-.foot-spacer{flex:1;min-width:24px}
+.foot-spacer{display:none}
 .foot-box{border:1.5px solid #bbb;border-radius:10px;padding:9px 6px;text-align:center;font-size:12px;font-weight:700;letter-spacing:.08em;color:#555;background:#f6f1e7}
 .foot-box.bar{border-color:#7a4a12;color:#7a4a12;background:#fdf3df}
 .foot-box.entrance{border-color:#9e1b21;color:#9e1b21;background:#fdf0f0;border-style:dashed}
 .foot-box.booth{border-color:#445;color:#334;background:#eef1f4}
-.foot-left{display:flex;flex-direction:column;gap:8px;align-items:stretch}
-.foot-box.booth{writing-mode:vertical-rl;width:52px;min-height:118px;margin:0 auto;display:grid;place-items:center;padding:12px 6px;letter-spacing:.08em}
+.foot-left{grid-column:1/3;justify-self:start;width:128px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.foot-box.booth{writing-mode:vertical-rl;width:56px;min-height:112px;margin:0;display:grid;place-items:center;padding:12px 6px;letter-spacing:.08em}
 .plan-foot{align-items:flex-end}
 .foot-box small{display:block;font-weight:400;letter-spacing:0;font-size:11px;margin-top:2px}
-.plan-note{color:#666;font-size:13px;max-width:640px;margin:12px auto 0;text-align:center}
 </style>
 <style>
 /* ---- Detail, cards and editing controls ---- */
@@ -77,10 +81,10 @@ button.reset{background:#5b2333;color:#fff;border:0;padding:11px 16px;border-rad
 <p class="note">Tap a table on the floor plan to see its guests. In the table list below you can tap any name to edit it, add or remove guests, move a guest to another table, renumber or swap tables, and move a table's position on the plan. All edits save automatically on this device. Works fully offline. Use the Export button below to copy your edited seating and paste it back to Sage.</p>
 <div class="plan" aria-label="Venue floor plan with wedding table numbers — Sky Ballroom, 30 tables">
 <div class="plan-stage">STAGE<span class="stage-dims">30 ft wide × 15 ft deep · Stage high 2.5 ft</span></div>
-<div class="plan-upper"><div class="plan-vip" id="planVip"></div><div class="side-entrance" aria-label="Side entrance near Table 15">↵ ENTRANCE<small>near Table 15</small></div></div>
+<div class="plan-upper"><div class="plan-vip" id="planVip"></div><div class="side-entrance" aria-label="Side entrance near Tables 15 and 17">↵ ENTRANCE<small>Tables 15 &amp; 17</small></div></div>
 <div class="plan-grid" id="planGrid"></div>
-<div class="plan-foot"><div class="foot-left"><div class="foot-box booth">📸 PHOTO BOOTH<small>Above the Bar</small></div><div class="foot-box bar">🍸 BAR<small>Bottom-left</small></div></div><div class="foot-box">🎛 AV</div><div class="foot-entrance">ENTRANCE<small>Main · bottom centre</small></div><span class="foot-spacer" aria-hidden="true"></span></div>
-<p class="plan-note">Sky Ballroom (30 tables). VIP oval in the centre below the stage. Red carpet aisle down the centre. Tables are staggered in a slight zigzag — the two columns on each side are offset by about half a row, as in the venue plan. Tables 1–13 = left side, front to back. Tables 14–29 = right side, front to back. Side entrance at the top right, near Table 15; main entrance at the bottom centre, beside the AV box. Bar at the bottom left, with the Photo Booth right above it, clear of the tables.</p>
+<div class="plan-foot"><div class="foot-left"><div class="foot-box booth">📸 PHOTO BOOTH<small>Above the Bar</small></div><div class="foot-box bar">🍸 BAR<small>Under Table 11</small></div></div><div class="foot-av-group"><div class="foot-box">🎛 AV</div><div class="foot-entrance">ENTRANCE<small>Main · bottom, right of centre</small></div></div></div>
+
 </div>
 <div id="detail"><em>Tap a table above to see its guests here.</em></div>
 <h2>All tables</h2><div class="grid" id="all"></div>
