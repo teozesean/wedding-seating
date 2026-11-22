@@ -36,6 +36,9 @@ input[type=search]{width:100%;padding:12px;font-size:16px;border:1px solid #bbb;
 .foot-box.bar{border-color:#7a4a12;color:#7a4a12;background:#fdf3df}
 .foot-box.entrance{border-color:#9e1b21;color:#9e1b21;background:#fdf0f0;border-style:dashed}
 .foot-box.booth{border-color:#445;color:#334;background:#eef1f4}
+.foot-left{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.foot-box.booth{writing-mode:vertical-rl;width:52px;min-height:118px;margin:0 auto;display:grid;place-items:center;padding:12px 6px;letter-spacing:.08em}
+.plan-foot{align-items:flex-end}
 .foot-box small{display:block;font-weight:400;letter-spacing:0;font-size:11px;margin-top:2px}
 .plan-note{color:#666;font-size:13px;max-width:640px;margin:12px auto 0;text-align:center}
 </style>
@@ -72,12 +75,12 @@ button.reset{background:#5b2333;color:#fff;border:0;padding:11px 16px;border-rad
 <input type="search" id="q" placeholder="Search a guest name…">
 <div id="results"></div>
 <p class="note">Tap a table on the floor plan to see its guests. In the table list below you can tap any name to edit it, add or remove guests, move a guest to another table, renumber or swap tables, and move a table's position on the plan. All edits save automatically on this device. Works fully offline. Use the Export button below to copy your edited seating and paste it back to Sage.</p>
-<div class="plan" aria-label="Venue floor plan with wedding table numbers — Sky Ballroom, 29 plus 1 tables">
+<div class="plan" aria-label="Venue floor plan with wedding table numbers — Sky Ballroom, 30 tables">
 <div class="plan-stage">STAGE<span class="stage-dims">30 ft wide × 15 ft deep · Stage high 2.5 ft</span></div>
-<div class="plan-upper"><div class="plan-vip" id="planVip"></div><div class="side-entrance" aria-label="Side entrance near Table 16">↵ ENTRANCE<small>near Table 16</small></div></div>
+<div class="plan-upper"><div class="plan-vip" id="planVip"></div><div class="side-entrance" aria-label="Side entrance near Table 15">↵ ENTRANCE<small>near Table 15</small></div></div>
 <div class="plan-grid" id="planGrid"></div>
-<div class="plan-foot"><div class="foot-box bar">🍸 BAR<small>Bottom-left</small></div><div class="foot-box booth">📸 PHOTO BOOTH<small>Next to the Bar</small></div><div class="foot-box">🎛 AV</div><div class="foot-entrance">ENTRANCE<small>Main · bottom centre</small></div><span class="foot-spacer" aria-hidden="true"></span></div>
-<p class="plan-note">Sky Ballroom (29+1 tables). Table 1 = VIP oval in the centre below the stage. Red carpet aisle down the centre. Tables are staggered in a slight zigzag — the two columns on each side are offset by about half a row, as in the venue plan. Tables 2–14 = left side, front to back. Tables 15–30 = right side, front to back. Side entrance at the top right, near Table 16; main entrance at the bottom centre, beside the AV box. Bar at the bottom left, with the Photo Booth right next to it, clear of the tables.</p>
+<div class="plan-foot"><div class="foot-left"><div class="foot-box booth">📸 PHOTO BOOTH<small>Above the Bar</small></div><div class="foot-box bar">🍸 BAR<small>Bottom-left</small></div></div><div class="foot-box">🎛 AV</div><div class="foot-entrance">ENTRANCE<small>Main · bottom centre</small></div><span class="foot-spacer" aria-hidden="true"></span></div>
+<p class="plan-note">Sky Ballroom (30 tables). VIP oval in the centre below the stage. Red carpet aisle down the centre. Tables are staggered in a slight zigzag — the two columns on each side are offset by about half a row, as in the venue plan. Tables 1–13 = left side, front to back. Tables 14–29 = right side, front to back. Side entrance at the top right, near Table 15; main entrance at the bottom centre, beside the AV box. Bar at the bottom left, with the Photo Booth right above it, clear of the tables.</p>
 </div>
 <div id="detail"><em>Tap a table above to see its guests here.</em></div>
 <h2>All tables</h2><div class="grid" id="all"></div>
@@ -89,12 +92,12 @@ button.reset{background:#5b2333;color:#fff;border:0;padding:11px 16px;border-rad
 <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="act" id="copyExport">Copy seating</button><button class="act light" id="downloadExport">Download as .txt</button></div>
 <p class="note" id="exportStatus"></p>
 </div>
-<p class="note">Tables 16 &amp; 18 are vegetarian (素席). Table 9 seat 10 is blank on purpose — a backup seat; that empty seat stays and can't be removed. Reset restores the original Tables 1–30 seating, guest names and floor-plan positions.</p>
+<p class="note">Tables 15 &amp; 17 are vegetarian (素席). Table 8 seat 10 is blank on purpose — a backup seat; that empty seat stays and can't be removed. Reset restores the original VIP + Tables 1–29 seating, guest names and floor-plan positions.</p>
 </div>
 <script>
-const ORIGINAL={"1": ["Rui Rou", "Sean", "Sean's mom", "Sean's dad", "RR's mom", "RR's dad", "Ah Ma", "Daniel", "Ze Lyn", "Lao Yi", "Lao Yi Teow"], "2": ["Ah Eng", "Ah Eng +1", "Ah Eng +2", "Mary", "Mary's Husband", "Wen Ping", "Wen Ping +1", "Wen Ping +2", "Harvey", "Harvey +1"], "3": ["Ah Cheok", "Ah Tian", "Ah Tian +1", "Ah Tian +2", "Ah Tian +3", "Ah Hock", "Ah Hock +1", "Ah Hock +2", "Ah Hock +3", "Ah Hock +4"], "4": ["Lee Kee Seng", "Lee Kee Seng +1", "Lee Kee Seng +2", "Ai Leen", "Bernard", "Bernard +1", "Bernard +2", "Bernard +3", "Bernard +4", "Cheryl"], "5": ["Ah Chai", "Ah Chai +1", "Ah Chai +2", "Ah Chai +3 (Dasmond Teo)", "Tomas", "Tomas +1", "Tomas +2", "Terence", "Terence +1", "Terence +2"], "6": ["BooCher Heng", "Mui Nyuk Lee", "Vincent Toh", "Vincent Toh +1", "Robert Hew", "Robert Hew +1", "Khoo", "Khoo +1", "Rick", "Rick +1"], "7": ["Yoon Sik (Sebas's Dad)", "Eun Joo (Sebas's Mom)", "Mervin", "Mervin +1", "Alvin", "Alvin +1", "Goh Joon Wah", "Goh Joon Wah +1", "Goh Lim Ann", "Goh Lim Ann +1"], "8": ["Jun Hoe", "Cass", "Shane Lee", "Amelia", "Jared", "Ethan", "Tina (Yun Tang)", "Jason", "Haow Jinq", "Sze Haw"], "9": ["Rui Qi", "Robin", "Rui Han", "Christina", "Wen", "Janet", "Jon", "Debby", "Sook Wei", ""], "10": ["Yi Zen", "Shane Chia", "Gabe", "Sebastian", "Siew Wai", "Lee Hin", "Yong Jun", "Yoong Jian", "Chen Yong", "Brian Chen"], "11": ["Ian", "Choon Pei Yap (Isa)", "Kar Yeen", "Aron", "Timmy", "Charmaine", "Yee Sum", "Chun Yen", "Sherwyn", "Sayako"], "12": ["張佳薇", "赖富章", "丘汉杰", "陈银英", "黄井", "萧伶娣", "苏阿堡", "罗月娇", "陈满妹", ""], "13": ["秀珍", "CLINIC 1", "CLINIC 2", "CLINIC 3", "CLINIC 4", "CLINIC 5", "APPLE", "ORANGE", "MICHAEL", "爱心"], "14": ["李金华", "梁宝凌", "郑美煌", "苏秀嬅", "郑意锜", "郑义勋", "張顺量", "刘靖财", "陈金嫺", "李伟乔"], "16": ["叶上蕾", "李淑勉", "关观婉", "張卉芳", "SIA", "郑金华", "郑金华", "家工人", "家工人", "清姐"], "17": ["娘家 1"], "18": ["JASMINE", "陈忠顺", "KAREN", "林月爱", "ANGIE NG", "三姐儿子富华", "三姐媳妇绮萍", "玉珍", "俐瑩", ""], "19": ["娘家 2"], "20": ["娘家 3"], "21": ["老师家人 1", "老师"], "22": ["老师家人 2"], "23": ["秀秀", "LAI", "VALERIE", "SERENA", "萧翠萍", "張秀英", "曾素钎", "陈思俊", "叶美玲", "颜明月"], "24": ["陈淑贞", "黄绣莉", "阙伟福", "林小玲", "黄稏烈", "谢佳融", "谢佩诗", "谢和莃", "MOLLY", "杨玉梅"], "25": ["文丽君", "罗琼芳", "張浟涟", "郑碧琪", "蔡静莉", "詹丽珍", "吳太", "李丽玉", "郭夤袀", "吳素玲"], "26": ["刘美娜", "黄育桓", "陈素枝", "張富翔", "李雅媚", "陈忠庆", "曾翠霞", "黄锦友", "郑宝珠", "黄维杰"], "27": ["小姑"], "28": ["黄仲修", "CINDY", "ANDY", "ADELINE", "CC LEE", "CC LEE WIFE", "VINCENT", "VINCENT'S WIFE", "杨建裕", "吳清懿"], "29": ["HO KHAI SING", "CHONG CL", "WUU SL", "WONG KW", "Alfred Tan", "ANDY NG", "Lim Hock Chun", "MS GOH PG", "小姑", "小姑"], "30": ["LEE CHIANG BAK", "ALBERT LIM", "TAN MING HO", "NG KAM WAH", "SIAU HC", "LUM PC", "UNCLE CHONG", "DR PATRICK LOI", "ALAN WONG", ""], "15": ["四叔 + 小姑"]};
-const KEY='wedding-seating-offline-v4';
-const VEG_DEFAULT={'16':1,'18':1};
+const ORIGINAL={"VIP": ["Rui Rou", "Sean", "Sean's mom", "Sean's dad", "RR's mom", "RR's dad", "Ah Ma", "Daniel", "Ze Lyn", "Lao Yi", "Lao Yi Teow"], "1": ["Ah Eng", "Ah Eng +1", "Ah Eng +2", "Mary", "Mary's Husband", "Wen Ping", "Wen Ping +1", "Wen Ping +2", "Harvey", "Harvey +1"], "2": ["Ah Cheok", "Ah Tian", "Ah Tian +1", "Ah Tian +2", "Ah Tian +3", "Ah Hock", "Ah Hock +1", "Ah Hock +2", "Ah Hock +3", "Ah Hock +4"], "3": ["Lee Kee Seng", "Lee Kee Seng +1", "Lee Kee Seng +2", "Ai Leen", "Bernard", "Bernard +1", "Bernard +2", "Bernard +3", "Bernard +4", "Cheryl"], "4": ["Ah Chai", "Ah Chai +1", "Ah Chai +2", "Ah Chai +3 (Dasmond Teo)", "Tomas", "Tomas +1", "Tomas +2", "Terence", "Terence +1", "Terence +2"], "5": ["BooCher Heng", "Mui Nyuk Lee", "Vincent Toh", "Vincent Toh +1", "Robert Hew", "Robert Hew +1", "Khoo", "Khoo +1", "Rick", "Rick +1"], "6": ["Yoon Sik (Sebas's Dad)", "Eun Joo (Sebas's Mom)", "Mervin", "Mervin +1", "Alvin", "Alvin +1", "Goh Joon Wah", "Goh Joon Wah +1", "Goh Lim Ann", "Goh Lim Ann +1"], "7": ["Jun Hoe", "Cass", "Shane Lee", "Amelia", "Jared", "Ethan", "Tina (Yun Tang)", "Jason", "Haow Jinq", "Sze Haw"], "8": ["Rui Qi", "Robin", "Rui Han", "Christina", "Wen", "Janet", "Jon", "Debby", "Sook Wei", ""], "9": ["Yi Zen", "Shane Chia", "Gabe", "Sebastian", "Siew Wai", "Lee Hin", "Yong Jun", "Yoong Jian", "Chen Yong", "Brian Chen"], "10": ["Ian", "Choon Pei Yap (Isa)", "Kar Yeen", "Aron", "Timmy", "Charmaine", "Yee Sum", "Chun Yen", "Sherwyn", "Sayako"], "11": ["張佳薇", "赖富章", "丘汉杰", "陈银英", "黄井", "萧伶娣", "苏阿堡", "罗月娇", "陈满妹", ""], "12": ["秀珍", "CLINIC 1", "CLINIC 2", "CLINIC 3", "CLINIC 4", "CLINIC 5", "APPLE", "ORANGE", "MICHAEL", "爱心"], "13": ["李金华", "梁宝凌", "郑美煌", "苏秀嬅", "郑意锜", "郑义勋", "張顺量", "刘靖财", "陈金嫺", "李伟乔"], "14": ["四叔 + 小姑"], "15": ["叶上蕾", "李淑勉", "关观婉", "張卉芳", "SIA", "郑金华", "郑金华", "家工人", "家工人", "清姐"], "16": ["娘家 1"], "17": ["JASMINE", "陈忠顺", "KAREN", "林月爱", "ANGIE NG", "三姐儿子富华", "三姐媳妇绮萍", "玉珍", "俐瑩", ""], "18": ["娘家 2"], "19": ["娘家 3"], "20": ["老师家人 1", "老师"], "21": ["老师家人 2"], "22": ["秀秀", "LAI", "VALERIE", "SERENA", "萧翠萍", "張秀英", "曾素钎", "陈思俊", "叶美玲", "颜明月"], "23": ["陈淑贞", "黄绣莉", "阙伟福", "林小玲", "黄稏烈", "谢佳融", "谢佩诗", "谢和莃", "MOLLY", "杨玉梅"], "24": ["文丽君", "罗琼芳", "張浟涟", "郑碧琪", "蔡静莉", "詹丽珍", "吳太", "李丽玉", "郭夤袀", "吳素玲"], "25": ["刘美娜", "黄育桓", "陈素枝", "張富翔", "李雅媚", "陈忠庆", "曾翠霞", "黄锦友", "郑宝珠", "黄维杰"], "26": ["小姑"], "27": ["黄仲修", "CINDY", "ANDY", "ADELINE", "CC LEE", "CC LEE WIFE", "VINCENT", "VINCENT'S WIFE", "杨建裕", "吳清懿"], "28": ["HO KHAI SING", "CHONG CL", "WUU SL", "WONG KW", "Alfred Tan", "ANDY NG", "Lim Hock Chun", "MS GOH PG", "小姑", "小姑"], "29": ["LEE CHIANG BAK", "ALBERT LIM", "TAN MING HO", "NG KAM WAH", "SIAU HC", "LUM PC", "UNCLE CHONG", "DR PATRICK LOI", "ALAN WONG", ""]};
+const KEY='wedding-seating-offline-v5';
+const VEG_DEFAULT={'15':1,'17':1};
 const INDIV_VEG={"RR's mom":1,"Yi Zen":1,"老师":1};
 function isIndivVeg(n){return !!INDIV_VEG[String(n||'').trim()]}
 /* Floor-plan slots, in the original Malaysia page layout.
@@ -105,19 +108,20 @@ function isIndivVeg(n){return !!INDIV_VEG[String(n||'').trim()]}
 const SLOTS=[{id:'vip',x:2,y:0}];
 for(let i=0;i<13;i++) SLOTS.push({id:'L'+i,x:i===12?1:i%2,y:Math.floor(i/2)+1});
 for(let i=0;i<16;i++) SLOTS.push({id:'R'+i,x:3+(i%2),y:Math.floor(i/2)+1});
-function defaultAssign(){const a={};a.vip='1';for(let i=0;i<13;i++)a['L'+i]=String(i+2);for(let i=0;i<16;i++)a['R'+i]=String(i+15);return a}
+function defaultAssign(){const a={};a.vip='VIP';for(let i=0;i<13;i++)a['L'+i]=String(i+1);for(let i=0;i<16;i++)a['R'+i]=String(i+14);return a}
 function defaultState(){return {data:JSON.parse(JSON.stringify(ORIGINAL)),assign:defaultAssign(),veg:Object.assign({},VEG_DEFAULT)}}
 let state;
 try{const s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.data&&s.assign&&Object.keys(s.assign).length===30){state=s; if(!state.veg) state.veg=Object.assign({},VEG_DEFAULT)} else state=defaultState()}catch(e){state=defaultState()}
 let selected=null;
 function save(){localStorage.setItem(KEY,JSON.stringify(state))}
-function tables(){return Object.keys(state.data).sort((a,b)=>+a-+b)}
+function tables(){return Object.keys(state.data).sort((a,b)=>(a==='VIP'?-1:b==='VIP'?1:+a-+b))}
+function tableLabel(t){return String(t)==='VIP'?'VIP':'Table '+t}
 function count(t){return state.data[t].filter(x=>x.trim()).length}
 function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function slotOf(t){for(const id in state.assign) if(state.assign[id]===String(t)) return SLOTS.find(s=>s.id===id); return null}
 </script>
 <script>
-function moveOptions(t,i){return '<option value="">Move to…</option>'+tables().filter(x=>x!==String(t)).map(x=>'<option value="'+x+'">Table '+x+'</option>').join('')}
+function moveOptions(t,i){return '<option value="">Move to…</option>'+tables().filter(x=>x!==String(t)).map(x=>'<option value="'+x+'">'+tableLabel(x)+'</option>').join('')}
 function guestList(t){
   return '<ol class="guests">'+state.data[t].map((n,i)=>{
     if(!n.trim()) return '<li class="guest"><span class="guest-row"><span class="gname empty">— empty seat —</span></span></li>';
@@ -128,24 +132,25 @@ function guestList(t){
   }).join('')+'</ol>';
 }
 function tableControls(t){
-  const others=tables().filter(x=>x!==String(t));
+  if(String(t)==='VIP'){return '<div class="tcontrols"><div class="row2"><span>VIP table — no number.</span></div><div class="row2 pos-btns"><span>Move on plan:</span><button class="pos-btn" data-t="'+t+'" data-dir="left" title="Move left" aria-label="Move table left">←</button><button class="pos-btn" data-t="'+t+'" data-dir="up" title="Move up (towards stage)" aria-label="Move table up">↑</button><button class="pos-btn" data-t="'+t+'" data-dir="down" title="Move down" aria-label="Move table down">↓</button><button class="pos-btn" data-t="'+t+'" data-dir="right" title="Move right" aria-label="Move table right">→</button></div></div>'}
+  const others=tables().filter(x=>x!==String(t)&&x!=='VIP');
   return '<div class="tcontrols">'
   +'<div class="row2"><label>Table number: <input type="number" class="renum-input" data-t="'+t+'" value="'+t+'" min="1"></label><button class="act light renum-btn" data-t="'+t+'">Renumber</button></div>'
-  +'<div class="row2"><label>Swap number with: <select class="swap-sel" data-t="'+t+'"><option value="">Pick a table…</option>'+others.map(x=>'<option value="'+x+'">Table '+x+'</option>').join('')+'</select></label><button class="act light swap-btn" data-t="'+t+'">Swap</button></div>'
+  +'<div class="row2"><label>Swap number with: <select class="swap-sel" data-t="'+t+'"><option value="">Pick a table…</option>'+others.map(x=>'<option value="'+x+'">'+tableLabel(x)+'</option>').join('')+'</select></label><button class="act light swap-btn" data-t="'+t+'">Swap</button></div>'
   +'<div class="row2 pos-btns"><span>Move on plan:</span><button class="pos-btn" data-t="'+t+'" data-dir="left" title="Move left" aria-label="Move table left">←</button><button class="pos-btn" data-t="'+t+'" data-dir="up" title="Move up (towards stage)" aria-label="Move table up">↑</button><button class="pos-btn" data-t="'+t+'" data-dir="down" title="Move down" aria-label="Move table down">↓</button><button class="pos-btn" data-t="'+t+'" data-dir="right" title="Move right" aria-label="Move table right">→</button></div>'
   +'</div>';
 }
-function addRow(t){return '<div class="add-row"><input type="text" class="add-input" data-t="'+t+'" placeholder="New guest name…" aria-label="New guest name for Table '+t+'"><button class="act add-btn" data-t="'+t+'">Add guest</button></div>'}
-function cardHtml(t){return '<div class="card" id="card-'+t+'"><h3>Table '+t+(state.veg[t]?' <span class="vegtag">素席 Vegetarian</span>':'')+(t==='1'?' · VIP':'')+' <span class="vegtag" style="color:#999;font-weight:400">· '+count(t)+' guests</span></h3>'+guestList(t)+addRow(t)+tableControls(t)+'</div>'}
+function addRow(t){return '<div class="add-row"><input type="text" class="add-input" data-t="'+t+'" placeholder="New guest name…" aria-label="New guest name for '+tableLabel(t)+'"><button class="act add-btn" data-t="'+t+'">Add guest</button></div>'}
+function cardHtml(t){return '<div class="card" id="card-'+t+'"><h3>'+tableLabel(t)+(state.veg[t]?' <span class="vegtag">素席 Vegetarian</span>':'')+' <span class="vegtag" style="color:#999;font-weight:400">· '+count(t)+' guests</span></h3>'+guestList(t)+addRow(t)+tableControls(t)+'</div>'}
 function hasIndivVegGuest(t){return !state.veg[t] && (state.data[t]||[]).some(function(n){return isIndivVeg(n)})}
 function leafBadge(t){return (hasIndivVegGuest(t)||state.veg[t])?'<span class="leaf-badge" aria-hidden="true">🌿</span>':''}
 function renderPlan(){
-  document.getElementById('planVip').innerHTML='<button class="ptable vip'+(selected===state.assign.vip?' sel':'')+'" data-t="'+state.assign.vip+'">Table '+state.assign.vip+' · VIP'+leafBadge(state.assign.vip)+'</button>';
+  document.getElementById('planVip').innerHTML='<button class="ptable vip'+(selected===state.assign.vip?' sel':'')+'" data-t="'+state.assign.vip+'">VIP'+leafBadge(state.assign.vip)+'</button>';
   const g=document.getElementById('planGrid'); let h='<div class="aisle" aria-hidden="true"><span>Red Carpet</span></div>';
   for(const s of SLOTS){ if(s.id==='vip') continue; const t=state.assign[s.id];
-    h+='<button class="ptable'+(state.veg[t]?' veg':'')+(selected===t?' sel':'')+((s.x===0||s.x===4)?' stagger':'')+'" data-t="'+t+'" style="grid-column:'+(s.x+1)+';grid-row:'+s.y+'" aria-label="Table '+t+(hasIndivVegGuest(t)?' — has vegetarian guest':'')+' — show guests">'+t+leafBadge(t)+'</button>'; }
-  /* keep the empty cell beside Table 14 (last left row, outer/left) blank —
-     no circle, and Table 14 keeps the standard 52px size in the aisle-side column */
+    h+='<button class="ptable'+(state.veg[t]?' veg':'')+(selected===t?' sel':'')+((s.x===0||s.x===4)?' stagger':'')+'" data-t="'+t+'" style="grid-column:'+(s.x+1)+';grid-row:'+s.y+'" aria-label="'+tableLabel(t)+(hasIndivVegGuest(t)?' — has vegetarian guest':'')+' — show guests">'+t+leafBadge(t)+'</button>'; }
+  /* keep the empty cell beside Table 13 (last left row, outer/left) blank —
+     no circle, and Table 13 keeps the standard 52px size in the aisle-side column */
   h+='<div class="slot-empty" style="grid-column:1;grid-row:7" aria-hidden="true"></div>';
   g.innerHTML=h;
 }
@@ -157,7 +162,7 @@ function renderAll(){
 function show(t,scroll=true){
   selected=String(t);
   document.querySelectorAll('.ptable').forEach(b=>b.classList.toggle('sel',b.dataset.t===selected));
-  document.getElementById('detail').innerHTML='<h3>Table '+t+(state.veg[t]?' <span class="vegtag">· 素席 Vegetarian</span>':'')+(t==='1'?' · VIP':'')+'</h3>'+guestList(t)+addRow(t);
+  document.getElementById('detail').innerHTML='<h3>'+tableLabel(t)+(state.veg[t]?' <span class="vegtag">· 素席 Vegetarian</span>':'')+'</h3>'+guestList(t)+addRow(t);
   if(scroll) document.getElementById('detail').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 </script>
@@ -173,7 +178,7 @@ function renumber(t,newNum){
   newNum=String(newNum||'').trim();
   if(!/^\d+$/.test(newNum)||+newNum<1){alert('Enter a whole table number of 1 or more.');return}
   if(newNum===String(t)) return;
-  if(state.data[newNum]){alert('Table '+newNum+' already exists — no duplicate table numbers allowed. Pick an unused number, or use Swap instead.');return}
+  if(state.data[newNum]){alert(tableLabel(newNum)+' already exists — no duplicate table numbers allowed. Pick an unused number, or use Swap instead.');return}
   state.data[newNum]=state.data[t]; delete state.data[t];
   for(const id in state.assign) if(state.assign[id]===String(t)) state.assign[id]=newNum;
   if(state.veg[t]){delete state.veg[t]; state.veg[newNum]=1}
@@ -199,13 +204,13 @@ function movePosition(t,dir){
     if(dir==='down'&&s.x===slot.x&&s.y>slot.y&&(!cand||s.y<cand.y)) cand=s;
     if(dir==='up'&&s.x===slot.x&&s.y<slot.y&&(!cand||s.y>cand.y)) cand=s;
   }
-  if(!cand){alert('Table '+t+' cannot move '+dir+' from its current spot on the plan.');return}
+  if(!cand){alert(tableLabel(t)+' cannot move '+dir+' from its current spot on the plan.');return}
   const other=state.assign[cand.id]; state.assign[cand.id]=String(t); state.assign[slot.id]=other;
   save(); renderAll();
 }
 document.addEventListener('click',e=>{
   const pb=e.target.closest('.ptable'); if(pb){show(pb.dataset.t);return}
-  const rm=e.target.closest('.rm'); if(rm){const t=rm.dataset.t,i=+rm.dataset.i; const nm=state.data[t][i]; if(confirm('Remove '+nm+' from Table '+t+'?')){state.data[t].splice(i,1); save(); renderAll();} return}
+  const rm=e.target.closest('.rm'); if(rm){const t=rm.dataset.t,i=+rm.dataset.i; const nm=state.data[t][i]; if(confirm('Remove '+nm+' from '+tableLabel(t)+'?')){state.data[t].splice(i,1); save(); renderAll();} return}
   const add=e.target.closest('.add-btn'); if(add){const t=add.dataset.t; const inp=document.querySelectorAll('.add-input[data-t="'+t+'"]'); let v=''; inp.forEach(x=>{if(x.value.trim()) v=x.value.trim()}); if(!v){alert('Type the new guest name first.');return} const ei=state.data[t].findIndex(x=>!x.trim()); if(ei>=0) state.data[t][ei]=v; else state.data[t].push(v); save(); renderAll(); return}
   const rn=e.target.closest('.renum-btn'); if(rn){const t=rn.dataset.t; const inp=document.querySelector('.renum-input[data-t="'+t+'"]'); renumber(t,inp?inp.value:''); return}
   const sw=e.target.closest('.swap-btn'); if(sw){const t=sw.dataset.t; const sel=document.querySelector('.swap-sel[data-t="'+t+'"]'); swapNumbers(t,sel?sel.value:''); return}
@@ -227,27 +232,27 @@ document.getElementById('q').addEventListener('input',e=>{
   const q=e.target.value.trim().toLowerCase(); const box=document.getElementById('results');
   if(!q){box.innerHTML='';return}
   let hits=[]; for(const t of tables()) state.data[t].forEach(n=>{if(n&&n.toLowerCase().includes(q)) hits.push({t,n})});
-  box.innerHTML=hits.length?hits.map(h=>'<div class="res" data-t="'+h.t+'"><b>'+escapeHtml(h.n)+'</b>'+(isIndivVeg(h.n)?' <span class="veg-indiv">Vegetarian</span>':'')+' — Table '+h.t+'</div>').join(''):'<div class="res">No match found.</div>';
+  box.innerHTML=hits.length?hits.map(h=>'<div class="res" data-t="'+h.t+'"><b>'+escapeHtml(h.n)+'</b>'+(isIndivVeg(h.n)?' <span class="veg-indiv">Vegetarian</span>':'')+' — '+tableLabel(h.t)+'</div>').join(''):'<div class="res">No match found.</div>';
   box.querySelectorAll('.res[data-t]').forEach(r=>r.addEventListener('click',()=>show(r.dataset.t)));
 });
 document.getElementById('reset').onclick=()=>{if(confirm('Restore the original seating? Your edits on this device will be removed.')){state=defaultState(); selected=null; save(); renderAll();}};
 function buildExportText(){
   /* Current seating from live state (includes this device's saved edits,
      not just the baseline), one table per line; empty seats as [blank]. */
-  return tables().map(t=>'Table '+t+': '+state.data[t].map(n=>n.trim()?(isIndivVeg(n)?n+' (Vegetarian)':n):'[blank]').join(', ')).join('\n');
+  return tables().map(t=>tableLabel(t)+': '+state.data[t].map(n=>n.trim()?(isIndivVeg(n)?n+' (Vegetarian)':n):'[blank]').join(', ')).join('\n');
 }
 function setExportStatus(msg){document.getElementById('exportStatus').textContent=msg;}
 function copyExportText(txt){
   const ta=document.getElementById('exportText');
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(txt).then(
-      ()=>setExportStatus('\u2713 Copied to clipboard \u2014 paste it back to Sage to share your seating.'),
-      ()=>{ta.focus(); ta.select(); setExportStatus('Couldn\'t copy automatically \u2014 the seating is selected in the box above: press Copy, then paste it back to Sage.');}
+      ()=>setExportStatus('\u2713 Copied to clipboard — paste it back to Sage to share your seating.'),
+      ()=>{ta.focus(); ta.select(); setExportStatus('Couldn\'t copy automatically — the seating is selected in the box above: press Copy, then paste it back to Sage.');}
     );
   } else {
     ta.focus(); ta.select();
     let ok=false; try{ok=document.execCommand('copy');}catch(e){}
-    setExportStatus(ok?'\u2713 Copied \u2014 paste it back to Sage to share your seating.':'Couldn\'t copy automatically \u2014 the seating is in the box above: tap it, Select All, then Copy, and paste it back to Sage.');
+    setExportStatus(ok?'\u2713 Copied — paste it back to Sage to share your seating.':'Couldn\'t copy automatically — the seating is in the box above: tap it, Select All, then Copy, and paste it back to Sage.');
   }
 }
 function showExport(){
